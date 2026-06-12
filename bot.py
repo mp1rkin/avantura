@@ -48,7 +48,7 @@ async def download_and_send_video(update: Update, context: ContextTypes.DEFAULT_
     url = update.message.text.strip()
 
     if not is_video_link(url):
-        await update.message.reply_text("❌ Это не похоже на поддерживаемую ссылку на видео.")
+        # В групповых чатах не отвечаем на не-ссылки
         return
 
     # Отправляем сообщение о начале скачивания
@@ -127,7 +127,8 @@ def main():
     application.add_error_handler(error_handler)
 
     # Запускаем бота
-    print("🤖 Бот запущен!")
+    print("[OK] Bot started successfully!")
+    logger.info("Bot is running...")
     application.run_polling(allowed_updates=Update.ALL_TYPES)
 
 if __name__ == '__main__':
