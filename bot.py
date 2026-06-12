@@ -104,6 +104,47 @@ async def download_and_send_video(update: Update, context: ContextTypes.DEFAULT_
             f"❌ Ошибка при скачивании видео:\n{str(e)[:200]}"
         )
 
+async def request_listener(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Прослушиватель всех входящих запросов"""
+    if update.message:
+        user = update.message.from_user
+        chat = update.message.chat
+        text = update.message.text or "[no text]"
+
+        # Логируем информацию о запросе
+        logger.info(f"📨 Incoming request:")
+        logger.info(f"   User: {user.first_name} (@{user.username}) [ID: {user.id}]")
+        logger.info(f"   Chat: {chat.type} [ID: {chat.id}]")
+        logger.info(f"   Message: {text[:100]}")
+
+        # Здесь можно добавить дополнительную логику:
+        # - Сохранение статистики
+        # - Проверка бан-листа
+        # - Анти-спам фильтры
+        # - Аналитика использования
+
+        # Передаем управление дальше в handle_request
+        await handle_request(update, context)
+
+async def handle_request(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    """Центральный обработчик всех запросов"""
+    if not update.message or not update.message.text:
+        return
+
+    text = update.message.text.strip()
+
+    # Проверяем, является ли это командой
+    if text.startswith('/'):
+        # Команды обрабатываются отдельными хендлерами
+        return
+
+    # Проверяем, является ли это ссылкой на видео
+    if is_video_link(text):
+        await download_and_send_video(update, context)
+    else:
+        # Необязательно: отвечаем на текст без ссылки
+        logger.info(f"   ⚠️ Not a video link, ignoring")
+
 async def error_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     """Обработчик ошибок"""
     logger.error(f"Update {update} caused error {context.error}")
@@ -123,7 +164,8 @@ def main():
 
     # Регистрируем обработчики
     application.add_handler(CommandHandler("start", start))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, download_and_send_video))
+    # Прослушиватель для всех текстовых сообщений
+    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, request_listener))
     application.add_error_handler(error_handler)
 
     # Запускаем бота
