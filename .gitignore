@@ -1,0 +1,12 @@
+# Godot project files
+.godot/
+*.import
+.godot/
+
+# Export files (keep exe)
+export/*.pck
+export/*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db

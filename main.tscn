@@ -1,0 +1,173 @@
+[gd_scene load_steps=4 format=3 uid="uid://cqm3n5gvhc7y5"]
+
+[ext_resource type="PackedScene" uid="uid://bn8yqxhfqqp3r" path="res://player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://main.gd" id="2_main"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ground"]
+size = Vector2(300, 40)
+
+[node name="Main" type="Node2D"]
+script = ExtResource("2_main")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_left = -500.0
+offset_top = -500.0
+offset_right = 2500.0
+offset_bottom = 1500.0
+color = Color(0.1, 0.1, 0.3, 1)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(200, 950)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+position_smoothing_speed = 5.0
+
+[node name="Platforms" type="Node2D" parent="."]
+
+[node name="Platform1" type="StaticBody2D" parent="Platforms"]
+position = Vector2(200, 1000)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform1"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/Platform1"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="Platform2" type="StaticBody2D" parent="Platforms"]
+position = Vector2(450, 850)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform2"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/Platform2"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="Platform3" type="StaticBody2D" parent="Platforms"]
+position = Vector2(700, 750)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform3"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/Platform3"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="Platform4" type="StaticBody2D" parent="Platforms"]
+position = Vector2(500, 600)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform4"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/Platform4"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="Platform5" type="StaticBody2D" parent="Platforms"]
+position = Vector2(800, 500)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform5"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/Platform5"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="Platform6" type="StaticBody2D" parent="Platforms"]
+position = Vector2(600, 350)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform6"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/Platform6"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="Platform7" type="StaticBody2D" parent="Platforms"]
+position = Vector2(900, 250)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/Platform7"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/Platform7"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="FinalPlatform" type="StaticBody2D" parent="Platforms"]
+position = Vector2(1150, 100)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platforms/FinalPlatform"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="Platforms/FinalPlatform"]
+offset_left = -150.0
+offset_top = -20.0
+offset_right = 150.0
+offset_bottom = 20.0
+color = Color(0.2, 0.8, 0.3, 1)
+
+[node name="FinishPoint" type="Area2D" parent="."]
+position = Vector2(1150, 30)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FinishPoint"]
+shape = SubResource("RectangleShape2D_ground")
+
+[node name="ColorRect" type="ColorRect" parent="FinishPoint"]
+offset_left = -40.0
+offset_top = -40.0
+offset_right = 40.0
+offset_bottom = 40.0
+color = Color(1, 0.2, 0.2, 1)
+
+[node name="Label" type="Label" parent="FinishPoint"]
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = -37.0
+text = "FINISH"
+horizontal_alignment = 1
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="VictoryLabel" type="Label" parent="UI"]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -50.0
+offset_right = 300.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 48
+text = "ПОЗДРАВЛЯЮ! ТЫ ПОБЕДИЛ!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="body_entered" from="FinishPoint" to="." method="_on_finish_point_body_entered"]
