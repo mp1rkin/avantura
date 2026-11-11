@@ -1,0 +1,5 @@
+﻿Вибірка,k-NN (k),k-NN Accuracy,Naive Bayes Accuracy,Різниця,Кращий
+Sample 1,1,1.0000,1.0000,0.0000,Naive Bayes
+Sample 2,1,1.0000,1.0000,0.0000,Naive Bayes
+Sample 3,9,0.9556,0.9111,0.0444,k-NN
+Sample 4,1,0.9944,0.9916,0.0028,k-NN
